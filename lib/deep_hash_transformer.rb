@@ -1,8 +1,6 @@
 require 'deep_hash_transformer/version'
 
 class DeepHashTransformer
-  attr_reader :hash
-
   OPS = {
     dasherize:  ->(val) { val.to_s.tr('_'.freeze, '-'.freeze) },
     identity:   ->(val) { val },
@@ -19,7 +17,7 @@ class DeepHashTransformer
     transform_value(hash, ops)
   end
 
-  OPS.keys.each do |operation|
+  OPS.each_key do |operation|
     define_method(operation) { tr(operation) }
   end
 

@@ -1,5 +1,3 @@
-# coding: utf-8
-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'deep_hash_transformer/version'
@@ -13,9 +11,9 @@ Gem::Specification.new do |spec|
   spec.version       = DeepHashTransformer::VERSION
 
   spec.summary       = 'Transforms deeply nested hash structure'
-  spec.description   = <<-EOD
+  spec.description   = <<-DESCRIPTION
     DeepHashTransformer helps to transform deeply nested hash structures
-  EOD
+  DESCRIPTION
 
   spec.license       = 'MIT'
 
