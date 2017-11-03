@@ -1,3 +1,7 @@
+*current master*
+
+* Drops support for Ruby 2.0
+
 *0.1.0 (April 27, 2017)*
 
 * Initial version

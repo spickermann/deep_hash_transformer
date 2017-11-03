@@ -30,9 +30,7 @@ class DeepHashTransformer
     when Array
       value.map { |e| transform_value(e, ops) }
     when Hash
-      Hash[
-        value.map { |k, v| [transform_key(k, ops), transform_value(v, ops)] }
-      ]
+      value.map { |k, v| [transform_key(k, ops), transform_value(v, ops)] }.to_h
     else
       value
     end
