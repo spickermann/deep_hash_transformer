@@ -7,7 +7,7 @@ RSpec.describe DeepHashTransformer do
     }
   end
 
-  describe '#tr with `%i[underscore symbolize]`' do
+  describe '#tr with `:underscore, :symbolize`' do
     subject { DeepHashTransformer.new(hash).tr(:underscore, :symbolize) }
 
     it do
