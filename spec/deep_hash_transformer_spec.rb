@@ -62,7 +62,7 @@ RSpec.describe DeepHashTransformer do
       is_expected.to eq(
         Integer => 123,
         :foobar => { bar: 'bar' },
-        :aa_zz  => [{ :bar => :bar, :'a-z' => 'a-z' }]
+        :aa_zz  => [{ bar: :bar, 'a-z': 'a-z' }]
       )
     end
   end

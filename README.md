@@ -18,6 +18,12 @@ Include the gem to your Gemfile:
 gem 'deep_hash_transformer'
 ```
 
+If you are still use Ruby 2.1 or below:
+
+```ruby
+gem 'deep_hash_transformer', '~> 0.1.1'
+```
+
 And then execute:
 
     $ bundle

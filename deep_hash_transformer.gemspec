@@ -6,6 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Martin Spickermann']
   spec.email         = ['spickermann@gmail.com']
   spec.homepage      = 'https://github.com/spickermann/deep_hash_transformer'
+  spec.license       = 'MIT'
 
   spec.name          = 'deep_hash_transformer'
   spec.version       = DeepHashTransformer::VERSION
@@ -15,11 +16,10 @@ Gem::Specification.new do |spec|
     DeepHashTransformer helps to transform deeply nested hash structures
   DESCRIPTION
 
-  spec.license       = 'MIT'
-
   spec.files         = Dir['CHANGELOG', 'MIT-LICENSE', 'README', 'lib/**/*', 'spec/**/*']
 
   spec.require_paths = ['lib']
+  spec.required_ruby_version = '>= 2.2.0'
 
   spec.add_development_dependency('coveralls')
   spec.add_development_dependency('rake')
