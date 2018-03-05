@@ -1,14 +1,14 @@
 RSpec.describe DeepHashTransformer do
-  let(:hash) do
-    {
+  subject do
+    described_class.new(
       Integer => 123,
       :foobar => { bar: 'bar' },
       'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
-    }
+    )
   end
 
   describe '#tr with `:underscore, :symbolize`' do
-    subject { DeepHashTransformer.new(hash).tr(:underscore, :symbolize) }
+    subject { super().tr(:underscore, :symbolize) }
 
     it do
       is_expected.to eq(
@@ -20,7 +20,7 @@ RSpec.describe DeepHashTransformer do
   end
 
   describe '#dasherize' do
-    subject { DeepHashTransformer.new(hash).dasherize }
+    subject { super().dasherize }
 
     it do
       is_expected.to eq(
@@ -32,7 +32,7 @@ RSpec.describe DeepHashTransformer do
   end
 
   describe '#identity' do
-    subject { DeepHashTransformer.new(hash).identity }
+    subject { super().identity }
 
     it do
       is_expected.to eq(
@@ -44,7 +44,7 @@ RSpec.describe DeepHashTransformer do
   end
 
   describe '#stringify' do
-    subject { DeepHashTransformer.new(hash).stringify }
+    subject { super().stringify }
 
     it do
       is_expected.to eq(
@@ -56,7 +56,7 @@ RSpec.describe DeepHashTransformer do
   end
 
   describe '#symbolize' do
-    subject { DeepHashTransformer.new(hash).symbolize }
+    subject { super().symbolize }
 
     it do
       is_expected.to eq(
@@ -68,7 +68,7 @@ RSpec.describe DeepHashTransformer do
   end
 
   describe '#underscore' do
-    subject { DeepHashTransformer.new(hash).underscore }
+    subject { super().underscore }
 
     it do
       is_expected.to eq(

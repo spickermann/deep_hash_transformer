@@ -1,5 +1,7 @@
 *current master*
 
+* Adds `rubocop-rspec`
+
 *1.0.0 (December 26, 2017)*
 
 * Runs specs against Ruby up to version 2.5
