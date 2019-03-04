@@ -1,6 +1,7 @@
 *current master*
 
 * Adds `rubocop-rspec`
+* Ensure Ruby 2.6 compability
 
 *1.0.0 (December 26, 2017)*
 
