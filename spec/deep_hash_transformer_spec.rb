@@ -11,10 +11,10 @@ RSpec.describe DeepHashTransformer do
     subject { super().tr(:underscore, :symbolize) }
 
     it do
-      is_expected.to eq(
+      expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         :foobar => { bar: 'bar' },
-        :aa_zz  => [{ bar: :bar, a_z: 'a-z' }]
+        :aa_zz => [{ bar: :bar, a_z: 'a-z' }]
       )
     end
   end
@@ -23,10 +23,10 @@ RSpec.describe DeepHashTransformer do
     subject { super().dasherize }
 
     it do
-      is_expected.to eq(
+      expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         'foobar' => { 'bar' => 'bar' },
-        'aa-zz'  => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
+        'aa-zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
       )
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe DeepHashTransformer do
     subject { super().identity }
 
     it do
-      is_expected.to eq(
+      expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         :foobar => { bar: 'bar' },
         'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
@@ -47,10 +47,10 @@ RSpec.describe DeepHashTransformer do
     subject { super().stringify }
 
     it do
-      is_expected.to eq(
+      expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         'foobar' => { 'bar' => 'bar' },
-        'aa_zz'  => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
+        'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
       )
     end
   end
@@ -59,10 +59,10 @@ RSpec.describe DeepHashTransformer do
     subject { super().symbolize }
 
     it do
-      is_expected.to eq(
+      expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         :foobar => { bar: 'bar' },
-        :aa_zz  => [{ bar: :bar, 'a-z': 'a-z' }]
+        :aa_zz => [{ bar: :bar, 'a-z': 'a-z' }]
       )
     end
   end
@@ -71,10 +71,10 @@ RSpec.describe DeepHashTransformer do
     subject { super().underscore }
 
     it do
-      is_expected.to eq(
+      expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         'foobar' => { 'bar' => 'bar' },
-        'aa_zz'  => [{ 'bar' => :bar, 'a_z' => 'a-z' }]
+        'aa_zz' => [{ 'bar' => :bar, 'a_z' => 'a-z' }]
       )
     end
   end

@@ -2,10 +2,10 @@ require 'deep_hash_transformer/version'
 
 class DeepHashTransformer
   OPS = {
-    dasherize:  ->(val) { val.to_s.tr('_'.freeze, '-'.freeze) },
-    identity:   ->(val) { val },
-    stringify:  ->(val) { val.to_s },
-    symbolize:  ->(val) { val.to_sym },
+    dasherize: ->(val) { val.to_s.tr('_'.freeze, '-'.freeze) },
+    identity: ->(val) { val },
+    stringify: ->(val) { val.to_s },
+    symbolize: ->(val) { val.to_sym },
     underscore: ->(val) { val.to_s.tr('-'.freeze, '_'.freeze) }
   }.freeze
 
