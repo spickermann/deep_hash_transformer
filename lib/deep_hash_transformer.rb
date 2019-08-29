@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'deep_hash_transformer/version'
 
 class DeepHashTransformer
   OPS = {
-    dasherize: ->(val) { val.to_s.tr('_'.freeze, '-'.freeze) },
+    dasherize: ->(val) { val.to_s.tr('_', '-') },
     identity: ->(val) { val },
     stringify: ->(val) { val.to_s },
     symbolize: ->(val) { val.to_sym },
-    underscore: ->(val) { val.to_s.tr('-'.freeze, '_'.freeze) }
+    underscore: ->(val) { val.to_s.tr('-', '_') }
   }.freeze
 
   def initialize(hash)

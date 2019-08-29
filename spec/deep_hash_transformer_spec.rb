@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe DeepHashTransformer do
   subject do
     described_class.new(

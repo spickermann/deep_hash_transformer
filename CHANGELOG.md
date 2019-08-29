@@ -2,6 +2,7 @@
 
 * Adds `rubocop-rspec`
 * Ensure Ruby 2.6 compability
+* Drops support for Ruby <= 2.2
 
 *1.0.0 (December 26, 2017)*
 
