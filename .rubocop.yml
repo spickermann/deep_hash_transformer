@@ -1,4 +1,23 @@
 inherit_from:
   '.ruby-style.yml'
 require:
-  'rubocop-rspec'
+  - 'rubocop-rspec'
+  - 'rubocop-performance'
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+RSpec/LeakyConstantDeclaration:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
