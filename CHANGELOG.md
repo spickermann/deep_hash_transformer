@@ -4,6 +4,8 @@
 * Ensure Ruby 2.6 compability
 * Ensure Ruby 2.7 compability
 * Drops support for Ruby <= 2.2
+* Drops support for Ruby 2.3
+* Drops support for Ruby 2.4
 
 *1.0.0 (December 26, 2017)*
 
