@@ -1,8 +1,8 @@
-*current master*
+*2.0.0 (December 28, 2020)*
 
-* Adds `rubocop-rspec`
 * Ensure Ruby 2.6 compability
 * Ensure Ruby 2.7 compability
+* Ensure Ruby 3.0 compability
 * Drops support for Ruby <= 2.2
 * Drops support for Ruby 2.3
 * Drops support for Ruby 2.4

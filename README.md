@@ -17,7 +17,7 @@ Include the gem to your Gemfile:
 gem 'deep_hash_transformer'
 ```
 
-When you are still on Ruby 2.2:
+When you are still on Ruby 2.2 – 2.4:
 
 ```ruby
 gem 'deep_hash_transformer', '~> 1.0.0'
