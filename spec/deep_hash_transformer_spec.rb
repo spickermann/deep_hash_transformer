@@ -5,18 +5,18 @@ RSpec.describe DeepHashTransformer do
     described_class.new(
       Integer => 123,
       :foobar => { bar: 'bar' },
-      'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
+      'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }, { 'aZ' => 'aZ' }]
     )
   end
 
   describe '#tr with `:underscore, :symbolize`' do
-    subject { super().tr(:underscore, :symbolize) }
+    subject { super().tr(:snake_case, :symbolize) }
 
     it do
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         :foobar => { bar: 'bar' },
-        :aa_zz => [{ bar: :bar, a_z: 'a-z' }]
+        :aa_zz => [{ bar: :bar, a_z: 'a-z' }, { a_z: 'aZ' }]
       )
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe DeepHashTransformer do
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         'foobar' => { 'bar' => 'bar' },
-        'aa-zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
+        'aa-zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }, { 'aZ' => 'aZ' }]
       )
     end
   end
@@ -40,7 +40,7 @@ RSpec.describe DeepHashTransformer do
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         :foobar => { bar: 'bar' },
-        'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
+        'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }, { 'aZ' => 'aZ' }]
       )
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe DeepHashTransformer do
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         'foobar' => { 'bar' => 'bar' },
-        'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }]
+        'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }, { 'aZ' => 'aZ' }]
       )
     end
   end
@@ -64,7 +64,7 @@ RSpec.describe DeepHashTransformer do
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         :foobar => { bar: 'bar' },
-        :aa_zz => [{ bar: :bar, 'a-z': 'a-z' }]
+        :aa_zz => [{ bar: :bar, 'a-z': 'a-z' }, { aZ: 'aZ' }]
       )
     end
   end
@@ -76,7 +76,19 @@ RSpec.describe DeepHashTransformer do
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
         'foobar' => { 'bar' => 'bar' },
-        'aa_zz' => [{ 'bar' => :bar, 'a_z' => 'a-z' }]
+        'aa_zz' => [{ 'bar' => :bar, 'a_z' => 'a-z' }, { 'aZ' => 'aZ' }]
+      )
+    end
+  end
+
+  describe '#snake_case' do
+    subject { super().snake_case }
+
+    it do
+      expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
+        Integer => 123,
+        'foobar' => { 'bar' => 'bar' },
+        'aa_zz' => [{ 'bar' => :bar, 'a_z' => 'a-z' }, { 'a_z' => 'aZ' }]
       )
     end
   end
