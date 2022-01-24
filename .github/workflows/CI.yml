@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: master
+    branches: [ master ]
   pull_request:
-    branches: "*"
+    branches: [ master ]
 
 jobs:
   test:
@@ -12,17 +12,17 @@ jobs:
 
     strategy:
       matrix:
-        ruby: [2.5.8, 2.6.6, 2.7.2, 3.0.0, 3.1.0]
+        ruby: [2.5.9, 2.6.9, 2.7.5, 3.0.3, 3.1.0]
 
     name: CI Ruby ${{ matrix.ruby }}
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Setup Ruby and install gems
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - name: Install dependencies
+      - name: Install Gems
         run: bundle install
       - name: RSpec
         run: bundle exec rspec
