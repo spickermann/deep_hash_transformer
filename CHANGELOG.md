@@ -1,3 +1,7 @@
+*Unreleased*
+
+Ensure Ruby 3.1.0 compability
+
 *2.0.0 (December 28, 2020)*
 
 * Ensure Ruby 2.6 compability
