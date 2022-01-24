@@ -4,7 +4,7 @@ The `DeepHashTransformer` helps to translate keys of deeply nested hash (and arr
 
 [![License MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/spickermann/deep_hash_transformer/blob/master/MIT-LICENSE)
 [![Gem Version](https://badge.fury.io/rb/deep_hash_transformer.svg)](https://badge.fury.io/rb/deep_hash_transformer)
-![Build Status](https://github.com/spickermann/deep_hash_transformer/actions/workflows/ci.yml/badge.svg)
+![Build Status](https://github.com/spickermann/deep_hash_transformer/actions/workflows/CI.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/spickermann/deep_hash_transformer/badge.svg?branch=master)](https://coveralls.io/r/spickermann/deep_hash_transformer?branch=master)
 [![Code Climate](https://codeclimate.com/github/spickermann/deep_hash_transformer/badges/gpa.svg)](https://codeclimate.com/github/spickermann/deep_hash_transformer)
 [![Security](https://hakiri.io/github/spickermann/deep_hash_transformer/master.svg)](https://hakiri.io/github/spickermann/deep_hash_transformer/master)
