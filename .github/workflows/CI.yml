@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby: [2.5.9, 2.6.9, 2.7.5, 3.0.3, 3.1.0]
+        ruby: [3.1.0, 3.0.3, 2.7.5, 2.6.9, 2.5.9]
 
     name: CI Ruby ${{ matrix.ruby }}
     steps:
@@ -29,10 +29,14 @@ jobs:
       - name: Rubocop
         run: bundle exec rubocop
       - name: Coveralls
+        if: ${{ matrix.ruby == '3.1.0' }}
+        continue-on-error: true
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Code Climate
+        if: ${{ matrix.ruby == '3.1.0' }}
+        continue-on-error: true
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
