@@ -1,6 +1,7 @@
 *Unreleased*
 
-Ensure Ruby 3.1.0 compability
+* Ensure Ruby 3.1.0 compability
+* Switch from Travis CI to GitHub Actions
 
 *2.0.0 (December 28, 2020)*
 
