@@ -4,7 +4,7 @@ require 'bundler/setup'
 require 'deep_hash_transformer'
 require 'simplecov'
 
-SimpleCov.start 'ruby' do
+SimpleCov.start do
   if ENV['CI']
     require 'simplecov-lcov'
 
