@@ -7,7 +7,6 @@ The `DeepHashTransformer` helps to translate keys of deeply nested hash (and arr
 ![Build Status](https://github.com/spickermann/deep_hash_transformer/actions/workflows/CI.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/spickermann/deep_hash_transformer/badge.svg?branch=master)](https://coveralls.io/r/spickermann/deep_hash_transformer?branch=master)
 [![Code Climate](https://codeclimate.com/github/spickermann/deep_hash_transformer/badges/gpa.svg)](https://codeclimate.com/github/spickermann/deep_hash_transformer)
-[![Security](https://hakiri.io/github/spickermann/deep_hash_transformer/master.svg)](https://hakiri.io/github/spickermann/deep_hash_transformer/master)
 
 ## Installation
 
