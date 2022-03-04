@@ -1,23 +1,19 @@
 # frozen_string_literal: true
 
+require 'deep_hash_transformer/key_transformer'
 require 'deep_hash_transformer/version'
 
 class DeepHashTransformer
-  OPS = {
-    dasherize: ->(val) { val.to_s.tr('_', '-') },
-    identity: ->(val) { val },
-    stringify: ->(val) { val.to_s },
-    symbolize: ->(val) { val.to_sym },
-    underscore: ->(val) { val.to_s.tr('-', '_') },
-    snake_case: lambda do |val|
-      val
-        .to_s
-        .gsub(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
-        .gsub(/([a-z\d])([A-Z])/, '\1_\2')
-        .tr('-', '_')
-        .downcase
-    end
-  }.freeze
+  TRANSFORMATIONS = %i[
+    camel_case
+    dasherize
+    identity
+    pascal_case
+    snake_case
+    stringify
+    symbolize
+    underscore
+  ].freeze
 
   def initialize(hash)
     @hash = hash
@@ -27,7 +23,7 @@ class DeepHashTransformer
     transform_value(hash, ops)
   end
 
-  OPS.each_key do |operation|
+  TRANSFORMATIONS.each do |operation|
     define_method(operation) { tr(operation) }
   end
 
@@ -49,6 +45,6 @@ class DeepHashTransformer
   def transform_key(key, ops)
     return key unless [String, Symbol].include?(key.class)
 
-    ops.inject(key) { |k, op| OPS.fetch(op).call(k) }
+    ops.inject(key) { |k, op| KeyTransformer.public_send(op, k) }
   end
 end

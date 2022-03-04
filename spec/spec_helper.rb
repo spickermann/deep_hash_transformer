@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'deep_hash_transformer'
+require 'deep_hash_transformer/key_transformer'
 require 'simplecov'
 
 SimpleCov.start do
