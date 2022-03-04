@@ -1,22 +1,40 @@
 # frozen_string_literal: true
 
 RSpec.describe DeepHashTransformer do
-  subject do
-    described_class.new(
+  subject { described_class.new(example) }
+
+  let(:example) do
+    {
       Integer => 123,
-      :foobar => { bar: 'bar' },
-      'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }, { 'aZ' => 'aZ' }]
-    )
+      :symbol => { foo: 'bar' },
+      'string' => { 'foo' => 123 },
+      'nested-array' => [
+        {
+          'camelCased' => 'camelCased',
+          'dashed-key' => 'dashed-key',
+          'PascalCased' => 'PascalCased',
+          'under_scored' => 'under_scored'
+        }
+      ]
+    }
   end
 
-  describe '#tr with `:underscore, :symbolize`' do
+  describe '#tr with `:snake_case, :symbolize`' do
     subject { super().tr(:snake_case, :symbolize) }
 
-    it do
+    it do # rubocop:disable RSpec/ExampleLength
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
-        :foobar => { bar: 'bar' },
-        :aa_zz => [{ bar: :bar, a_z: 'a-z' }, { a_z: 'aZ' }]
+        :symbol => { foo: 'bar' },
+        :string => { foo: 123 },
+        :nested_array => [
+          {
+            camel_cased: 'camelCased',
+            dashed_key: 'dashed-key',
+            pascal_cased: 'PascalCased',
+            under_scored: 'under_scored'
+          }
+        ]
       )
     end
   end
@@ -24,11 +42,19 @@ RSpec.describe DeepHashTransformer do
   describe '#dasherize' do
     subject { super().dasherize }
 
-    it do
+    it do # rubocop:disable RSpec/ExampleLength
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
-        'foobar' => { 'bar' => 'bar' },
-        'aa-zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }, { 'aZ' => 'aZ' }]
+        'symbol' => { 'foo' => 'bar' },
+        'string' => { 'foo' => 123 },
+        'nested-array' => [
+          {
+            'camelCased' => 'camelCased',
+            'dashed-key' => 'dashed-key',
+            'PascalCased' => 'PascalCased',
+            'under-scored' => 'under_scored'
+          }
+        ]
       )
     end
   end
@@ -36,11 +62,25 @@ RSpec.describe DeepHashTransformer do
   describe '#identity' do
     subject { super().identity }
 
-    it do
+    it { is_expected.to eq(example) }
+  end
+
+  describe '#snake_case' do
+    subject { super().snake_case }
+
+    it do # rubocop:disable RSpec/ExampleLength
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
-        :foobar => { bar: 'bar' },
-        'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }, { 'aZ' => 'aZ' }]
+        'symbol' => { 'foo' => 'bar' },
+        'string' => { 'foo' => 123 },
+        'nested_array' => [
+          {
+            'camel_cased' => 'camelCased',
+            'dashed_key' => 'dashed-key',
+            'pascal_cased' => 'PascalCased',
+            'under_scored' => 'under_scored'
+          }
+        ]
       )
     end
   end
@@ -48,11 +88,19 @@ RSpec.describe DeepHashTransformer do
   describe '#stringify' do
     subject { super().stringify }
 
-    it do
+    it do # rubocop:disable RSpec/ExampleLength
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
-        'foobar' => { 'bar' => 'bar' },
-        'aa_zz' => [{ 'bar' => :bar, 'a-z' => 'a-z' }, { 'aZ' => 'aZ' }]
+        'symbol' => { 'foo' => 'bar' },
+        'string' => { 'foo' => 123 },
+        'nested-array' => [
+          {
+            'camelCased' => 'camelCased',
+            'dashed-key' => 'dashed-key',
+            'PascalCased' => 'PascalCased',
+            'under_scored' => 'under_scored'
+          }
+        ]
       )
     end
   end
@@ -60,11 +108,19 @@ RSpec.describe DeepHashTransformer do
   describe '#symbolize' do
     subject { super().symbolize }
 
-    it do
+    it do # rubocop:disable RSpec/ExampleLength
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
-        :foobar => { bar: 'bar' },
-        :aa_zz => [{ bar: :bar, 'a-z': 'a-z' }, { aZ: 'aZ' }]
+        :symbol => { foo: 'bar' },
+        :string => { foo: 123 },
+        :'nested-array' => [
+          {
+            PascalCased: 'PascalCased',
+            camelCased: 'camelCased',
+            'dashed-key': 'dashed-key',
+            under_scored: 'under_scored'
+          }
+        ]
       )
     end
   end
@@ -72,23 +128,19 @@ RSpec.describe DeepHashTransformer do
   describe '#underscore' do
     subject { super().underscore }
 
-    it do
+    it do # rubocop:disable RSpec/ExampleLength
       expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
         Integer => 123,
-        'foobar' => { 'bar' => 'bar' },
-        'aa_zz' => [{ 'bar' => :bar, 'a_z' => 'a-z' }, { 'aZ' => 'aZ' }]
-      )
-    end
-  end
-
-  describe '#snake_case' do
-    subject { super().snake_case }
-
-    it do
-      expect(subject).to eq( # rubocop:disable RSpec/NamedSubject
-        Integer => 123,
-        'foobar' => { 'bar' => 'bar' },
-        'aa_zz' => [{ 'bar' => :bar, 'a_z' => 'a-z' }, { 'a_z' => 'aZ' }]
+        'symbol' => { 'foo' => 'bar' },
+        'string' => { 'foo' => 123 },
+        'nested_array' => [
+          {
+            'camelCased' => 'camelCased',
+            'dashed_key' => 'dashed-key',
+            'PascalCased' => 'PascalCased',
+            'under_scored' => 'under_scored'
+          }
+        ]
       )
     end
   end
