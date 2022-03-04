@@ -94,6 +94,6 @@ RSpec.describe DeepHashTransformer do
   end
 
   it 'has a version number' do
-    expect(DeepHashTransformer::VERSION).not_to be nil
+    expect(DeepHashTransformer::VERSION).not_to be_nil
   end
 end
