@@ -10,12 +10,12 @@ class DeepHashTransformer
     symbolize: ->(val) { val.to_sym },
     underscore: ->(val) { val.to_s.tr('-', '_') },
     snake_case: lambda do |val|
-      val = val.dup.to_s
-      val.gsub!(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
-      val.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
-      val.tr!('-', '_')
-      val.downcase!
       val
+        .to_s
+        .gsub(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
+        .gsub(/([a-z\d])([A-Z])/, '\1_\2')
+        .tr('-', '_')
+        .downcase
     end
   }.freeze
 
