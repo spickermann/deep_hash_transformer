@@ -1,6 +1,10 @@
 # DeepHashTransformer
 
-The `DeepHashTransformer` helps to translate keys of deeply nested hash (and array) structures.
+The `DeepHashTransformer` helps to translate keys in deeply nested hash (and array) structures.
+
+In opposite to the ActiveSupport's `deep_transform_keys` method `deep_transform_keys` is the `DeepHashTransformer` able to transform keys in hashes that are stored in nested arrays, for example a structure like this `{ foo: [{ bar: 1 }, { bar: 2 }] }`
+
+A good use-case might be the transformation of a JSON API style hash (dasherized string keys) the was returned by an API to a hash that follows common Ruby idioms (symbolized underscore keys), see [Complex Example](#complex-example) below.
 
 [![License MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/spickermann/deep_hash_transformer/blob/master/MIT-LICENSE)
 [![Gem Version](https://badge.fury.io/rb/deep_hash_transformer.svg)](https://badge.fury.io/rb/deep_hash_transformer)
@@ -38,44 +42,60 @@ Or install it yourself as:
 
 ## Usage
 
-The `DeepHashTransformer` has currently the following key transformations implemented:
+The latest version of the `DeepHashTransformer` has the following key transformation operations implemented:
 
-```ruby
-dasherize:  ->(val) { val.to_s.tr('_', '-') }
-identity:   ->(val) { val }
-stringify:  ->(val) { val.to_s }
-symbolize:  ->(val) { val.to_sym }
-underscore: ->(val) { val.to_s.tr('-', '_') }
-```
+`:camel_case`
+: translates keys into `CamelCase`, example: `"foo_bar" => "FooBar"`
 
-Each transformation can be called by its name:
+`:dasherize`
+: translates underscores in keys into dashes, example: `"foo_bar" => "foo-bar"`
+
+`:identity`
+: returns the keys unchanged
+
+`:pascal_case`
+: translates keys into `pascalCase`, example: `"foo_bar" => "fooBar"`
+
+`:snake_case`
+: translates keys into `snake_case`, example: `"FooBar" => "foo_bar"`
+
+`:stringify`
+: translates symbol keys into strings, example `:fooBar => "fooBar"`
+
+`:symbolize`
+: translates string keys into symbos, example `"fooBar" => :fooBar`
+
+`:underscore`
+: translates dashes in keys into underscores, example: `:foo-bar => "foo_bar"`
+
+All transformation can be called by its name, for example:
 
 ```ruby
 DeepHashTransformer.new({ foo_bar: 'baz' }).dasherize
 #=> { 'foo-bar' => 'baz' }
 ```
 
-Or `tr` can be used to chain multiple transformations:
+Or you can use `tr` to chain multiple transformations:
 
 ```ruby
 DeepHashTransformer.new({ 'foo-bar' => 'baz' }).tr(:underscore, :symbolize)
 #=> { foo_bar: 'baz' }
 ```
 
-It is worth noting that `DeepHashTransformer` transforms only string or symbol keys and leaves other types untouched:
+It is worth noting that the `DeepHashTransformer` only transforms string or symbol keys and leaves other types untouched:
 
 ```ruby
-DeepHashTransformer.new({ 1 => 'foo', 2 => 'bar' }).symbolize
-#=> { 1 => 'foo', 2 => 'bar' }
+DeepHashTransformer.new({ 1 => 'foo', :bar => 'bar', Object => 'baz' }).stringify
+#=> { 1 => 'foo', 'bar' => 'bar', Object => 'baz' }
 ```
 
-The `dasherize` and the `underscore` transformations return hashes with stringify keys.
+All transformations apart from `symbolize` return per default hashes with stringify keys. When you want to have symbolized keys to be returned then use `tr` to chain your required transformation with `:symbolize`
 
-## Complex example
+## Complex Example
 
-`DeepHashTransformer` transforms all hash keys - even if the key is nested in another hash or stored in an nested array. This is it's biggest advantage over ActiveSupport's `deep_transform_keys` method that doesn't care of hashes in nested arrays.
+`DeepHashTransformer` transforms all hash keys - even if the key is nested in another hash or stored in a nested array. This is its biggest advantage over ActiveSupport's `deep_transform_keys` method which is not able to handle hashes in nested arrays.
 
-A good complex example might be the transformation of a JSON API style hash (dasherized string keys) to an hash that follows common Ruby idioms (symbolized underscore keys):
+Example: Transformation of a JSON API style hash (dasherized string keys) to a hash that follows common Ruby idioms (symbolized underscore keys).
 
 ```ruby
 json_api_style = {
@@ -102,10 +122,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/spicke
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
-
+5. Create a new Pull Request
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
