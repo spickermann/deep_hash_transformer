@@ -20,6 +20,13 @@ class DeepHashTransformer
   end
 
   def tr(*ops)
+    unknown_transformtions = ops.map(&:to_s) - TRANSFORMATIONS.map(&:to_s)
+    if unknown_transformtions.any?
+      raise(
+        ArgumentError, "unknown transformation(s): #{unknown_transformtions.join(',')}"
+      )
+    end
+
     transform_value(hash, ops)
   end
 
