@@ -44,31 +44,26 @@ Or install it yourself as:
 
 The latest version of the `DeepHashTransformer` has the following key transformation operations implemented:
 
-`:camel_case`
-: translates keys into `CamelCase`, example: `"foo_bar" => "FooBar"`
+<dl>
+  <dt><code>:camel_case</code></dt>
+  <dd>translates keys into <code>CamelCase</code>, example: <code>"foo_bar" => "FooBar"</code></dd>
+  <dt><code>:dasherize</code></dt>
+  <dd>translates underscores in keys into dashes, example: "foo_bar" => "foo-bar"</dd></dd>
+  <dt><code>:identity</code></dt>
+  <dd>returns the keys unchanged</dd>
+  <dt><code>:pascal_case</code></dt>
+  <dd>translates keys into <code>pascalCase</code>, example: <code>"foo_bar" => "fooBar"</code></dd>
+  <dt><code>:snake_case</code></dt>
+  <dd>translates keys into <code>snake_case</code>, example: <code>"FooBar" => "foo_bar"</code></dd>
+  <dt><code>:stringify</code></dt>
+  <dd>translates symbol keys into strings, example <code>:fooBar => "fooBar"</code></dd>
+  <dt><code>:symbolize</code></dt>
+  <dd>translates string keys into symbos, example <code>"fooBar" => :fooBar</code></dd>
+  <dt><code>:underscore</code></dt>
+  <dd>translates dashes in keys into underscores, example: <code>:foo-bar => "foo_bar"</code></dd>
+</dl>
 
-`:dasherize`
-: translates underscores in keys into dashes, example: `"foo_bar" => "foo-bar"`
-
-`:identity`
-: returns the keys unchanged
-
-`:pascal_case`
-: translates keys into `pascalCase`, example: `"foo_bar" => "fooBar"`
-
-`:snake_case`
-: translates keys into `snake_case`, example: `"FooBar" => "foo_bar"`
-
-`:stringify`
-: translates symbol keys into strings, example `:fooBar => "fooBar"`
-
-`:symbolize`
-: translates string keys into symbos, example `"fooBar" => :fooBar`
-
-`:underscore`
-: translates dashes in keys into underscores, example: `:foo-bar => "foo_bar"`
-
-All transformation can be called by its name, for example:
+All transformations can be called by their names, for example:
 
 ```ruby
 DeepHashTransformer.new({ foo_bar: 'baz' }).dasherize
@@ -82,7 +77,7 @@ DeepHashTransformer.new({ 'foo-bar' => 'baz' }).tr(:underscore, :symbolize)
 #=> { foo_bar: 'baz' }
 ```
 
-It is worth noting that the `DeepHashTransformer` only transforms string or symbol keys and leaves other types untouched:
+It is worth noting that the `DeepHashTransformer` only transforms string or symbol keys and leaves all other types untouched:
 
 ```ruby
 DeepHashTransformer.new({ 1 => 'foo', :bar => 'bar', Object => 'baz' }).stringify
@@ -93,7 +88,7 @@ All transformations apart from `symbolize` return per default hashes with string
 
 ## Complex Example
 
-`DeepHashTransformer` transforms all hash keys - even if the key is nested in another hash or stored in a nested array. This is its biggest advantage over ActiveSupport's `deep_transform_keys` method which is not able to handle hashes in nested arrays.
+`DeepHashTransformer` transforms all hash keys – even if the key is nested in another hash or stored in a nested array. This is its biggest advantage over ActiveSupport's `deep_transform_keys` method which is not able to handle hashes in nested arrays.
 
 Example: Transformation of a JSON API style hash (dasherized string keys) to a hash that follows common Ruby idioms (symbolized underscore keys).
 
