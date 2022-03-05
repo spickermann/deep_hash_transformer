@@ -1,8 +1,14 @@
 *Unreleased*
 
-* Three new transformations added: snake_case, camel_case, pascal_case
+*2.1.0 (March 06, 2022)*
+
+* Three new transformations added:
+  - snake_case (thanks, @Finnegan5),
+  - camel_case,
+  - pascal_case
 * Improved error message when called with an unknown transformation name
-* Ensure Ruby 3.1.0 compability
+* Improved documentation
+* Ensure Ruby 3.1.1 compability
 * Switch from Travis CI to GitHub Actions
 
 *2.0.0 (December 28, 2020)*
