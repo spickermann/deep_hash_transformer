@@ -1,5 +1,7 @@
 *Unreleased*
 
+* Three new transformations added: snake_case, camel_case, pascal_case
+* Improved error message when called with an unknown transformation name
 * Ensure Ruby 3.1.0 compability
 * Switch from Travis CI to GitHub Actions
 

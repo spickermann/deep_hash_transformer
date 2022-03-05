@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DeepHashTransformer
-  module KeyTransformer
+  module Operation
     class << self
       def camel_case(val)
         pascal_case(val)

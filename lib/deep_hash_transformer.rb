@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'deep_hash_transformer/key_transformer'
+require 'deep_hash_transformer/operation'
 require 'deep_hash_transformer/version'
 
 class DeepHashTransformer
-  TRANSFORMATIONS = %i[
+  OPS = %i[
     camel_case
     dasherize
     identity
@@ -20,7 +20,7 @@ class DeepHashTransformer
   end
 
   def tr(*ops)
-    unknown_transformtions = ops.map(&:to_s) - TRANSFORMATIONS.map(&:to_s)
+    unknown_transformtions = ops.map(&:to_s) - OPS.map(&:to_s)
     if unknown_transformtions.any?
       raise(
         ArgumentError, "unknown transformation(s): #{unknown_transformtions.join(',')}"
@@ -30,7 +30,7 @@ class DeepHashTransformer
     transform_value(hash, ops)
   end
 
-  TRANSFORMATIONS.each do |operation|
+  OPS.each do |operation|
     define_method(operation) { tr(operation) }
   end
 
@@ -52,6 +52,6 @@ class DeepHashTransformer
   def transform_key(key, ops)
     return key unless [String, Symbol].include?(key.class)
 
-    ops.inject(key) { |k, op| KeyTransformer.public_send(op, k) }
+    ops.inject(key) { |k, op| Operation.public_send(op, k) }
   end
 end

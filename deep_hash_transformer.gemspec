@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Transforms deeply nested hash structure'
   spec.description   = <<-DESCRIPTION
-    DeepHashTransformer helps to transform deeply nested hash structures
+    DeepHashTransformer helps to transform keys in deeply nested hash structures
   DESCRIPTION
 
   spec.files         = Dir['CHANGELOG', 'MIT-LICENSE', 'README', 'lib/**/*', 'spec/**/*']
