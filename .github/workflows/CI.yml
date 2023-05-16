@@ -40,3 +40,6 @@ jobs:
         uses: paambaati/codeclimate-action@v4.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
+        with:
+          coverageCommand: bundle exec rspec
+          debug: true
