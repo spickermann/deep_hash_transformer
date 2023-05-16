@@ -6,10 +6,10 @@ In opposite to the ActiveSupport's `deep_transform_keys` method `deep_transform_
 
 A good use-case might be the transformation of a JSON API style hash (dasherized string keys) the was returned by an API to a hash that follows common Ruby idioms (symbolized underscore keys), see [Complex Example](#complex-example) below.
 
-[![License MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/spickermann/deep_hash_transformer/blob/master/MIT-LICENSE)
+[![License MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/spickermann/deep_hash_transformer/blob/main/MIT-LICENSE)
 [![Gem Version](https://badge.fury.io/rb/deep_hash_transformer.svg)](https://badge.fury.io/rb/deep_hash_transformer)
 ![Build Status](https://github.com/spickermann/deep_hash_transformer/actions/workflows/CI.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/spickermann/deep_hash_transformer/badge.svg?branch=master)](https://coveralls.io/r/spickermann/deep_hash_transformer?branch=master)
+[![Coverage Status](https://coveralls.io/repos/spickermann/deep_hash_transformer/badge.svg?branch=main)](https://coveralls.io/r/spickermann/deep_hash_transformer?branch=main)
 [![Code Climate](https://codeclimate.com/github/spickermann/deep_hash_transformer/badges/gpa.svg)](https://codeclimate.com/github/spickermann/deep_hash_transformer)
 
 ## Installation
