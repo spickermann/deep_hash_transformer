@@ -1,5 +1,7 @@
 *Unreleased*
 
+*2.2.0 (May 17, 2023)*
+
 * Two new transformations added:
   - compact
   - compact_blank
