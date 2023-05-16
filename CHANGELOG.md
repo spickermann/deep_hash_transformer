@@ -1,5 +1,8 @@
 *Unreleased*
 
+* Ensure Ruby 3.2 compability
+* Ensure Ruby 3.3.0-preview compability
+
 *2.1.0 (March 06, 2022)*
 
 * Three new transformations added:
