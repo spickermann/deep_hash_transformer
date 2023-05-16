@@ -61,6 +61,10 @@ The latest version of the `DeepHashTransformer` has the following key transforma
   <dd>translates string keys into symbos, example <code>"fooBar" => :fooBar</code></dd>
   <dt><code>:underscore</code></dt>
   <dd>translates dashes in keys into underscores, example: <code>:foo-bar => "foo_bar"</code></dd>
+  <dt><code>:compact</code></dt>
+  <dd>removed <code>nil</code> values from the hash, example: <code>{ a: 1, b: nil } => { a: 1 }</code></dd>
+  <dt><code>:compact_blank</code></dt>
+  <dd>removed blank values (<code>nil</code>, <code>false</code>, or empty values from the hash, example: <code>{ a: 1, b: '' } => { a: 1 }</code></dd>
 </dl>
 
 All transformations can be called by their names, for example:
@@ -95,12 +99,12 @@ Example: Transformation of a JSON API style hash (dasherized string keys) to a h
 ```ruby
 json_api_style = {
   'nested-array' => [
-    { 'a-key' => 'a-value' }
+    { 'a-key' => 'a-value', 'b-key' => nil }
   ],
   'foo_bar' => 'baz'
 }
 
-DeepHashTransformer.new(json_api_style).tr(:underscore, :symbolize)
+DeepHashTransformer.new(json_api_style).tr(:underscore, :symbolize, :compact)
 #=> {
 #     nested_array: [
 #       { a_key: 'a-value' }

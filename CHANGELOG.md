@@ -1,5 +1,8 @@
 *Unreleased*
 
+* Two new transformations added:
+  - compact
+  - compact_blank
 * Ensure Ruby 3.2 compability
 * Ensure Ruby 3.3.0-preview compability
 

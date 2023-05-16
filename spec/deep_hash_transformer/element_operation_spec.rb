@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe DeepHashTransformer::Operation do
+RSpec.describe DeepHashTransformer::ElementOperation do
   examples = [
     :symbol, 'string', 'camelCase', 'dashed-key', 'PascalCase', 'under_scored'
   ]
@@ -22,7 +22,7 @@ RSpec.describe DeepHashTransformer::Operation do
   }
   # rubocop:enable Layout/HashAlignment, Style/SymbolArray, Style/WordArray
 
-  DeepHashTransformer::OPS.each do |method|
+  DeepHashTransformer::ELEMENT_OPS.each do |method|
     describe "##{method}" do
       let(:method) { method }
 
