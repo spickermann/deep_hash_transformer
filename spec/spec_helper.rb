@@ -9,7 +9,7 @@ require 'deep_hash_transformer/element_operation'
 require 'simplecov'
 
 SimpleCov.start do
-  # if ENV['CI']
+  if ENV['CI']
     require 'simplecov_json_formatter'
     require 'simplecov-lcov'
 
@@ -21,7 +21,7 @@ SimpleCov.start do
     formatter SimpleCov::Formatter::MultiFormatter.new [
       SimpleCov::Formatter::JSONFormatter, SimpleCov::Formatter::LcovFormatter
     ]
-  # end
+  end
 
   add_filter %w[version.rb initializer.rb]
 end
