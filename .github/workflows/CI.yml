@@ -18,22 +18,28 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+
       - name: Install Gems
         run: bundle install
+
       - name: RSpec
         run: bundle exec rspec
+
       - name: Rubocop
         run: bundle exec rubocop
+
       - name: Coveralls
         if: ${{ matrix.ruby == '3.2.2' }}
         continue-on-error: true
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Code Climate
         if: ${{ matrix.ruby == '3.2.2' }}
         continue-on-error: true
@@ -43,4 +49,3 @@ jobs:
         with:
           coverageCommand: bundle exec rspec
           coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
-          debug: true
