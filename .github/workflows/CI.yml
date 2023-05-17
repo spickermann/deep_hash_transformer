@@ -42,4 +42,4 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
         with:
           coverageCommand: bundle exec rspec
-          debug: true
+          coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
