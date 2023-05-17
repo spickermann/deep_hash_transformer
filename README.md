@@ -4,7 +4,7 @@ The `DeepHashTransformer` helps to translate keys in deeply nested hash (and arr
 
 In opposite to the ActiveSupport's `deep_transform_keys` method `deep_transform_keys` is the `DeepHashTransformer` able to transform keys in hashes that are stored in nested arrays, for example a structure like this `{ foo: [{ bar: 1 }, { bar: 2 }] }`
 
-A good use-case might be the transformation of a JSON API style hash (dasherized string keys) the was returned by an API to a hash that follows common Ruby idioms (symbolized underscore keys), see [Complex Example](#complex-example) below.
+A good use-case might be the transformation of a JSON API style hash (dasherized string keys) that was returned by an API to a hash that follows common Ruby idioms (symbolized underscore keys), see [Complex Example](#complex-example) below.
 
 [![License MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/spickermann/deep_hash_transformer/blob/main/MIT-LICENSE)
 [![Gem Version](https://badge.fury.io/rb/deep_hash_transformer.svg)](https://badge.fury.io/rb/deep_hash_transformer)
@@ -14,7 +14,7 @@ A good use-case might be the transformation of a JSON API style hash (dasherized
 
 ## Installation
 
-Include the gem to your Gemfile:
+Include the gem in your Gemfile:
 
 ```ruby
 gem 'deep_hash_transformer'
@@ -58,13 +58,13 @@ The latest version of the `DeepHashTransformer` has the following key transforma
   <dt><code>:stringify</code></dt>
   <dd>translates symbol keys into strings, example <code>:fooBar => "fooBar"</code></dd>
   <dt><code>:symbolize</code></dt>
-  <dd>translates string keys into symbos, example <code>"fooBar" => :fooBar</code></dd>
+  <dd>translates string keys into symbols, example <code>"fooBar" => :fooBar</code></dd>
   <dt><code>:underscore</code></dt>
   <dd>translates dashes in keys into underscores, example: <code>:foo-bar => "foo_bar"</code></dd>
   <dt><code>:compact</code></dt>
-  <dd>removed <code>nil</code> values from the hash, example: <code>{ a: 1, b: nil } => { a: 1 }</code></dd>
+  <dd>removes <code>nil</code> values from the hash, example: <code>{ a: 1, b: nil } => { a: 1 }</code></dd>
   <dt><code>:compact_blank</code></dt>
-  <dd>removed blank values (<code>nil</code>, <code>false</code>, or empty values from the hash, example: <code>{ a: 1, b: '' } => { a: 1 }</code></dd>
+  <dd>removes blank values (<code>nil</code>, <code>false</code>, or empty values) from the hash, example: <code>{ a: 1, b: '' } => { a: 1 }</code></dd>
 </dl>
 
 All transformations can be called by their names, for example:
@@ -88,11 +88,11 @@ DeepHashTransformer.new({ 1 => 'foo', :bar => 'bar', Object => 'baz' }).stringif
 #=> { 1 => 'foo', 'bar' => 'bar', Object => 'baz' }
 ```
 
-All transformations apart from `symbolize` return per default hashes with stringify keys. When you want to have symbolized keys to be returned then use `tr` to chain your required transformation with `:symbolize`
+All transformations apart from `symbolize` return per default hashes with stringify keys. When you want to have symbolized keys to be returned, then use `tr` to chain your required transformation with `:symbolize`
 
 ## Complex Example
 
-`DeepHashTransformer` transforms all hash keys – even if the key is nested in another hash or stored in a nested array. This is its biggest advantage over ActiveSupport's `deep_transform_keys` method which is not able to handle hashes in nested arrays.
+`DeepHashTransformer` transforms all hash keys – even if the key is nested in another hash or stored in a nested array. This is its biggest advantage over ActiveSupport's `deep_transform_keys` method, which is not able to handle hashes in nested arrays.
 
 Example: Transformation of a JSON API style hash (dasherized string keys) to a hash that follows common Ruby idioms (symbolized underscore keys).
 
@@ -121,7 +121,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/spicke
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+5. Create a new pull request
 
 ## License
 
