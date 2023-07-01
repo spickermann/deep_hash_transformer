@@ -17,7 +17,7 @@
   - pascal_case
 * Improved error message when called with an unknown transformation name
 * Improved documentation
-* Ensure Ruby 3.1.1 compability
+* Ensure Ruby 3.1 compability
 * Switch from Travis CI to GitHub Actions
 
 *2.0.0 (December 28, 2020)*
