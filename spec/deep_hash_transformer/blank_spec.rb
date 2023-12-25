@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe DeepHashTransformer::Blank do
-  describe '.call' do
+  describe ".call" do
     subject { described_class.call(value) }
 
-    presents = [true, 1, 0, 'any', [nil], { A: nil }]
-    blanks   = [nil, false, '', ' ', [], {}]
+    presents = [true, 1, 0, "any", [nil], {A: nil}]
+    blanks = [nil, false, "", " ", [], {}]
 
     presents.each do |value|
       context "with #{value.inspect}" do
