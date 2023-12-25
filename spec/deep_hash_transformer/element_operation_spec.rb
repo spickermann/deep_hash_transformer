@@ -2,7 +2,7 @@
 
 RSpec.describe DeepHashTransformer::ElementOperation do
   examples = [
-    :symbol, 'string', 'camelCase', 'dashed-key', 'PascalCase', 'under_scored'
+    :symbol, "string", "camelCase", "dashed-key", "PascalCase", "under_scored"
   ]
 
   subject do
@@ -11,14 +11,14 @@ RSpec.describe DeepHashTransformer::ElementOperation do
 
   # rubocop:disable Layout/HashAlignment, Style/SymbolArray, Style/WordArray
   expected_output = {
-    camel_case:  ['symbol', 'string', 'camelCase',  'dashedKey',   'pascalCase',  'underScored'],
-    dasherize:   ['symbol', 'string', 'camelCase',  'dashed-key',  'PascalCase',  'under-scored'],
-    identity:    [:symbol,  'string', 'camelCase',  'dashed-key',  'PascalCase',  'under_scored'],
-    pascal_case: ['Symbol', 'String', 'CamelCase',  'DashedKey',   'PascalCase',  'UnderScored'],
-    snake_case:  ['symbol', 'string', 'camel_case', 'dashed_key',  'pascal_case', 'under_scored'],
-    stringify:   ['symbol', 'string', 'camelCase',  'dashed-key',  'PascalCase',  'under_scored'],
-    symbolize:   [:symbol,  :string,  :camelCase,   :'dashed-key', :PascalCase,   :under_scored],
-    underscore:  ['symbol', 'string', 'camelCase',  'dashed_key',  'PascalCase',  'under_scored']
+    camel_case:  ["symbol", "string", "camelCase", "dashedKey", "pascalCase", "underScored"],
+    dasherize:   ["symbol", "string", "camelCase", "dashed-key", "PascalCase", "under-scored"],
+    identity:    [:symbol, "string", "camelCase", "dashed-key", "PascalCase", "under_scored"],
+    pascal_case: ["Symbol", "String", "CamelCase", "DashedKey", "PascalCase", "UnderScored"],
+    snake_case:  ["symbol", "string", "camel_case", "dashed_key", "pascal_case", "under_scored"],
+    stringify:   ["symbol", "string", "camelCase", "dashed-key", "PascalCase", "under_scored"],
+    symbolize:   [:symbol, :string, :camelCase, :"dashed-key", :PascalCase, :under_scored],
+    underscore:  ["symbol", "string", "camelCase", "dashed_key", "PascalCase", "under_scored"]
   }
   # rubocop:enable Layout/HashAlignment, Style/SymbolArray, Style/WordArray
 

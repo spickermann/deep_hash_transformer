@@ -1,4 +1,8 @@
-*Unreleased*
+*2.2.1 (December 25, 2023)*
+
+* Ensure Ruby 3.3 compability
+* Stop testing against Ruby < 3.0
+* Switch from Rubocop to Standard
 
 *2.2.0 (May 17, 2023)*
 

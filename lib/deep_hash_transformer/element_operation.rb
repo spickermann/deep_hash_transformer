@@ -10,7 +10,7 @@ class DeepHashTransformer
 
       def dasherize(val)
         stringify(val)
-          .tr('_', '-')
+          .tr("_", "-")
       end
 
       def identity(val)
@@ -34,14 +34,14 @@ class DeepHashTransformer
 
       def underscore(val)
         stringify(val)
-          .tr('-', '_')
+          .tr("-", "_")
       end
 
       def snake_case(val)
         stringify(val)
           .gsub(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
           .gsub(/([a-z\d])([A-Z])/, '\1_\2')
-          .tr('-', '_')
+          .tr("-", "_")
           .downcase
       end
     end

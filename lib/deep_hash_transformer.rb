@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'deep_hash_transformer/collection_operation'
-require 'deep_hash_transformer/element_operation'
-require 'deep_hash_transformer/version'
+require "deep_hash_transformer/collection_operation"
+require "deep_hash_transformer/element_operation"
+require "deep_hash_transformer/version"
 
 class DeepHashTransformer
   ELEMENT_OPS = %i[
@@ -31,7 +31,7 @@ class DeepHashTransformer
     unknown_transformations = ops.map(&:to_s) - OPS.map(&:to_s)
     if unknown_transformations.any?
       raise(
-        ArgumentError, "unknown transformation(s): #{unknown_transformations.join(',')}"
+        ArgumentError, "unknown transformation(s): #{unknown_transformations.join(",")}"
       )
     end
 
@@ -54,13 +54,13 @@ class DeepHashTransformer
 
   def transform_value(value, ops)
     collection = case value
-                 when Array
-                   value.map { |e| transform_value(e, ops) }
-                 when Hash
-                   value.map { |k, v| [transform_key(k, ops), transform_value(v, ops)] }.to_h
-                 else
-                   value
-                 end
+    when Array
+      value.map { |e| transform_value(e, ops) }
+    when Hash
+      value.map { |k, v| [transform_key(k, ops), transform_value(v, ops)] }.to_h
+    else
+      value
+    end
 
     transform_collection(collection, ops)
   end
