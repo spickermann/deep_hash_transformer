@@ -12,12 +12,12 @@ jobs:
 
     strategy:
       matrix:
-        ruby: [3.3.0, 3.2.2, 3.1.4, 3.0.6]
+        ruby: [3.3.0, 3.2.3, 3.1.4, 3.0.6]
 
     name: CI Ruby ${{ matrix.ruby }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -31,9 +31,14 @@ jobs:
       - name: Coveralls
         if: ${{ matrix.ruby == '3.3.0' }}
         continue-on-error: true
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Codacy Coverage
+        if: ${{ matrix.ruby == '3.3.0' }}
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
       - name: Code Climate
         if: ${{ matrix.ruby == '3.3.0' }}
         continue-on-error: true
