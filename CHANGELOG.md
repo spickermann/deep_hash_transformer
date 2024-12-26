@@ -1,3 +1,8 @@
+*unreleased*
+
+* Ensure Ruby 3.4 compability
+* Stop testing against Ruby 3.0
+
 *2.2.1 (December 25, 2023)*
 
 * Ensure Ruby 3.3 compability
