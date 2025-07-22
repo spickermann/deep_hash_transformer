@@ -1,5 +1,6 @@
 *unreleased*
 
+* Ensure Ruby 3.5 compability
 * Ensure Ruby 3.4 compability
 * Stop testing against Ruby 3.0
 

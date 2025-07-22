@@ -9,8 +9,8 @@ A good use-case might be the transformation of a JSON API style hash (dasherized
 [![License MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/spickermann/deep_hash_transformer/blob/main/MIT-LICENSE)
 [![Gem Version](https://badge.fury.io/rb/deep_hash_transformer.svg)](https://badge.fury.io/rb/deep_hash_transformer)
 [![Build Status](https://github.com/spickermann/deep_hash_transformer/actions/workflows/CI.yml/badge.svg)](https://github.com/spickermann/deep_hash_transformer/actions/workflows/CI.yml)
-[![Coverage Status](https://coveralls.io/repos/spickermann/deep_hash_transformer/badge.svg?branch=main)](https://coveralls.io/r/spickermann/deep_hash_transformer?branch=main)
-[![Code Climate](https://codeclimate.com/github/spickermann/deep_hash_transformer/badges/gpa.svg)](https://codeclimate.com/github/spickermann/deep_hash_transformer)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a3acda9da2a041ffbee1e6ad76e0c02f)](https://app.codacy.com/gh/spickermann/deep_hash_transformer/dashboard)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/a3acda9da2a041ffbee1e6ad76e0c02f)](https://app.codacy.com/gh/spickermann/deep_hash_transformer/dashboard)
 
 ## Installation
 
