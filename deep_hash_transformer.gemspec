@@ -13,15 +13,19 @@ Gem::Specification.new do |spec|
   spec.name = "deep_hash_transformer"
   spec.version = DeepHashTransformer::VERSION
 
-  spec.summary = "Transforms deeply nested hash structure"
+  spec.summary = "Transforms keys and cleans deeply nested hashes and arrays"
   spec.description = <<-DESCRIPTION
-    DeepHashTransformer helps to transform keys in deeply nested hash structures
+    Dependency-free key transformations and recursive cleanup for nested hashes and arrays.
   DESCRIPTION
 
-  spec.files = Dir["CHANGELOG", "MIT-LICENSE", "README", "lib/**/*", "spec/**/*"]
+  spec.files = ["CHANGELOG.md", "MIT-LICENSE", "README.md", *Dir["lib/**/*.rb"]]
 
   spec.require_paths = ["lib"]
-  spec.required_ruby_version = ">= 3.1.0"
+  spec.required_ruby_version = ">= 3.0.0"
 
   spec.metadata["rubygems_mfa_required"] = "true"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
+  spec.metadata["source_code_uri"] = spec.homepage
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/main/CHANGELOG.md"
+  spec.metadata["bug_tracker_uri"] = "#{spec.homepage}/issues"
 end
