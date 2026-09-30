@@ -35,7 +35,8 @@ class DeepHashTransformer
       name
     end
 
-    transform_value(hash, ops, {}.compare_by_identity)
+    key_ops, collection_ops = ops.partition { |op| ELEMENT_OPS.include?(op) }
+    transform_value(hash, key_ops, collection_ops, {}.compare_by_identity)
   end
 
   OPS.each do |operation|
@@ -48,12 +49,12 @@ class DeepHashTransformer
 
   def transform_collection(collection, ops)
     ops.inject(collection) do |c, op|
-      COLLECTION_OPS.include?(op) ? CollectionOperation.public_send(op, c) : c
+      CollectionOperation.public_send(op, c)
     end
   end
 
-  def transform_value(value, ops, ancestors)
-    return transform_collection(value, ops) unless value.is_a?(Array) || value.is_a?(Hash)
+  def transform_value(value, key_ops, collection_ops, ancestors)
+    return value unless value.is_a?(Array) || value.is_a?(Hash)
 
     raise ArgumentError, "cyclic Hash/Array structure" if ancestors.key?(value)
 
@@ -61,12 +62,14 @@ class DeepHashTransformer
     begin
       collection = case value
       when Array
-        value.map { |e| transform_value(e, ops, ancestors) }
+        value.map { |e| transform_value(e, key_ops, collection_ops, ancestors) }
       when Hash
-        value.map { |k, v| [transform_key(k, ops), transform_value(v, ops, ancestors)] }.to_h
+        result = {}
+        value.each { |k, v| result[transform_key(k, key_ops)] = transform_value(v, key_ops, collection_ops, ancestors) }
+        result
       end
 
-      transform_collection(collection, ops)
+      transform_collection(collection, collection_ops)
     ensure
       ancestors.delete(value)
     end
@@ -76,7 +79,7 @@ class DeepHashTransformer
     return key unless key.is_a?(String) || key.is_a?(Symbol)
 
     ops.inject(key) do |k, op|
-      ELEMENT_OPS.include?(op) ? ElementOperation.public_send(op, k) : k
+      ElementOperation.public_send(op, k)
     end
   end
 end
