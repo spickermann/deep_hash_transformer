@@ -15,7 +15,7 @@ class DeepHashTransformer
     def blank?
       return true unless value
       return value.blank? if value.respond_to?(:blank?)
-      return BLANK_STRING.match?(value) if value.is_a?(String)
+      return blank_string? if value.is_a?(String)
       return value.empty? if value.respond_to?(:empty?)
 
       false
@@ -24,5 +24,11 @@ class DeepHashTransformer
     private
 
     attr_reader :value
+
+    def blank_string?
+      BLANK_STRING.match?(value)
+    rescue Encoding::CompatibilityError
+      BLANK_STRING.match?(value.encode(Encoding::UTF_8))
+    end
   end
 end

@@ -21,21 +21,21 @@ class DeepHashTransformer
     compact_blank
   ].freeze
 
-  OPS = ELEMENT_OPS + COLLECTION_OPS
+  OPS = (ELEMENT_OPS + COLLECTION_OPS).freeze
 
   def initialize(hash)
     @hash = hash
   end
 
   def tr(*ops)
-    unknown_transformations = ops.map(&:to_s) - OPS.map(&:to_s)
-    if unknown_transformations.any?
-      raise(
-        ArgumentError, "unknown transformation(s): #{unknown_transformations.join(",")}"
-      )
+    ops = ops.map do |op|
+      name = op.to_sym if op.is_a?(String) || op.is_a?(Symbol)
+      raise ArgumentError, "unknown transformation: #{op.inspect}" unless OPS.include?(name)
+
+      name
     end
 
-    transform_value(hash, ops)
+    transform_value(hash, ops, {}.compare_by_identity)
   end
 
   OPS.each do |operation|
@@ -52,21 +52,28 @@ class DeepHashTransformer
     end
   end
 
-  def transform_value(value, ops)
-    collection = case value
-    when Array
-      value.map { |e| transform_value(e, ops) }
-    when Hash
-      value.map { |k, v| [transform_key(k, ops), transform_value(v, ops)] }.to_h
-    else
-      value
-    end
+  def transform_value(value, ops, ancestors)
+    return transform_collection(value, ops) unless value.is_a?(Array) || value.is_a?(Hash)
 
-    transform_collection(collection, ops)
+    raise ArgumentError, "cyclic Hash/Array structure" if ancestors.key?(value)
+
+    ancestors[value] = true
+    begin
+      collection = case value
+      when Array
+        value.map { |e| transform_value(e, ops, ancestors) }
+      when Hash
+        value.map { |k, v| [transform_key(k, ops), transform_value(v, ops, ancestors)] }.to_h
+      end
+
+      transform_collection(collection, ops)
+    ensure
+      ancestors.delete(value)
+    end
   end
 
   def transform_key(key, ops)
-    return key unless [String, Symbol].include?(key.class)
+    return key unless key.is_a?(String) || key.is_a?(Symbol)
 
     ops.inject(key) do |k, op|
       ELEMENT_OPS.include?(op) ? ElementOperation.public_send(op, k) : k

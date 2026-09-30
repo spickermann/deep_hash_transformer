@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
-require "deep_hash_transformer"
-require "deep_hash_transformer/blank"
-require "deep_hash_transformer/collection_operation"
-require "deep_hash_transformer/element_operation"
-
 require "simplecov"
 
 SimpleCov.start do
@@ -23,8 +18,12 @@ SimpleCov.start do
     ]
   end
 
-  add_filter %w[version.rb initializer.rb]
+  track_files "lib/**/*.rb"
+  add_filter "/spec/"
+  add_filter "/version.rb"
 end
+
+require "deep_hash_transformer"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
