@@ -1,8 +1,33 @@
-*unreleased*
+*3.0.0 (September 30, 2026)*
 
-* Ensure Ruby 4.0 compability
-* Ensure Ruby 3.4 compability
-* Stop testing against Ruby 3.0
+Maintenance status:
+
+* Enter maintenance mode: the feature set is considered complete and no new features
+  are planned. Security fixes may be released when needed. Compatibility with future
+  Ruby versions is not guaranteed.
+
+Breaking behavior changes:
+
+* Execute String operation names; previously accepted String names did nothing.
+* Reject operation-name objects other than Strings or Symbols with ArgumentError.
+* Lowercase Unicode initial capitals in camel_case (über_name becomes überName).
+* Transform String-subclass keys instead of skipping them.
+* Raise ArgumentError for cycles through collection values instead of SystemStackError.
+
+Fixes and maintenance:
+
+* Recognize valid UTF-16/UTF-32 whitespace during compact_blank cleanup.
+* Normalize and partition operations once per call, skip cleanup dispatch on scalars,
+  and build hashes directly to reduce traversal time and allocations. See benchmark
+  methodology and measured limits in docs/performance.md in the source repository.
+* Preserve last-value-wins collisions, combined traversal, and existing leaf sharing.
+* Restore coverage instrumentation before library loading and add behavioral regression tests.
+* Correct operation descriptions, the ActiveSupport comparison, and the contribution link.
+* Package README.md and CHANGELOG.md; omit specs from the runtime package.
+* Retain Ruby 3.0 support and test Ruby 3.0–3.4 and 4.0 using their latest patch releases.
+* Add isolated package verification and a reproducible runtime/allocation benchmark.
+
+See README migration notes before upgrading.
 
 *2.2.1 (December 25, 2023)*
 

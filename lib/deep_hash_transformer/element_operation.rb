@@ -5,7 +5,7 @@ class DeepHashTransformer
     class << self
       def camel_case(val)
         pascal_case(val)
-          .sub(/^[A-Z]/, &:downcase)
+          .sub(/\A[[:upper:]]/, &:downcase)
       end
 
       def dasherize(val)

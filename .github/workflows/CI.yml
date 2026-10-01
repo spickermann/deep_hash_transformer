@@ -6,13 +6,19 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_FROZEN: "true"
 
     strategy:
+      fail-fast: false
       matrix:
-        ruby: [4.0.0, 3.4.8, 3.3.9, 3.2.8, 3.1.7]
+        ruby: ['3.0', '3.1', '3.2', '3.3', '3.4', '4.0']
 
     name: CI Ruby ${{ matrix.ruby }}
     steps:
@@ -22,14 +28,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - name: Install Gems
-        run: bundle install
-      - name: RSpec
-        run: bundle exec rspec
-      - name: Standard
-        run: bundle exec standardrb
+          bundler-cache: true
+      - name: Tests and Standard
+        run: bundle exec rake
+      - name: Build and Verify Isolated Package
+        run: ruby script/verify_package.rb
       - name: Codacy Coverage
-        if: ${{ matrix.ruby == '3.4.8' }}
+        if: ${{ matrix.ruby == '4.0' }}
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
