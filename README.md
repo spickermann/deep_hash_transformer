@@ -194,8 +194,10 @@ README and Changelog are now packaged; specs are no longer included in the gem.
 Run `bundle install`, then `bundle exec rake` for tests and Standard.
 `ruby script/verify_package.rb` builds the gem under `pkg/`, checks its contents,
 and installs/tests that exact package in a temporary isolated gem directory.
-It does not publish anything. The ignored local `Gemfile.lock` can differ between
-Ruby versions; CI resolves compatible development dependencies for each version.
+It does not publish anything. The committed `Gemfile.lock` fixes development
+dependencies across the supported Ruby versions. Update it using the oldest
+supported Ruby, then verify the complete CI matrix before committing the update.
+The lockfile is not included in the published gem and adds no runtime dependencies.
 
 See [release procedure](https://github.com/spickermann/deep_hash_transformer/blob/main/docs/releasing.md) in the source repository for the
 separate review and publication steps. `bundle exec rake release` is a publishing
