@@ -60,10 +60,9 @@ class DeepHashTransformer
 
     ancestors[value] = true
     begin
-      collection = case value
-      when Array
+      collection = if value.is_a?(Array)
         value.map { |e| transform_value(e, key_ops, collection_ops, ancestors) }
-      when Hash
+      else
         result = {}
         value.each { |k, v| result[transform_key(k, key_ops)] = transform_value(v, key_ops, collection_ops, ancestors) }
         result

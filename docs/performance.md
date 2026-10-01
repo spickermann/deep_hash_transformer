@@ -25,7 +25,7 @@ and GC can affect allocation results; keys are not globally cached.
 
 ## Results
 
-| Fixture | Operation | 2.2.1 ms | 3.0.0 ms | Less time | Objects before → after |
+| Fixture | Operation | 2.2.1 ms | 3.0.0 ms | Less time | Objects old → new |
 |---|---|---:|---:|---:|---:|
 | small | stringify | 0.0054 | 0.0039 | 28.8% | 51 → 27 |
 | small | snake_case | 0.0114 | 0.0099 | 13.4% | 96 → 72 |
@@ -69,7 +69,8 @@ with overlapping sample ranges (baseline 0.480–0.505 ms, candidate 0.475–0.5
 No speed improvement is claimed for that case.
 
 Raw data: [baseline](benchmarks/2.2.1.json), [candidate](benchmarks/3.0.0.json).
-The committed JSON uses implementation labels instead of machine-local source paths.
+The committed JSON uses implementation labels instead of machine-local source
+paths.
 
 ## Optimization decisions
 

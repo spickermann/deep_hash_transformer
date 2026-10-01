@@ -4,6 +4,7 @@
 $LOAD_PATH.unshift(ENV.fetch("DHT_LIB", File.expand_path("../lib", __dir__)))
 require "deep_hash_transformer"
 require "json"
+require "active_support/core_ext/hash/keys" if ENV["COMPARE_ACTIVE_SUPPORT"] == "1"
 
 def clock
   Process.clock_gettime(Process::CLOCK_MONOTONIC)
@@ -62,14 +63,13 @@ end
 
 comparisons = []
 if ENV["COMPARE_ACTIVE_SUPPORT"] == "1"
-  require "active_support/core_ext/hash/keys"
   %w[small wide_10000].each do |name|
     input = datasets.fetch(name)
     candidates = {
       dht: -> { DeepHashTransformer.new(input).stringify },
       active_support: -> { input.deep_transform_keys(&:to_s) }
     }
-    raise "Comparison has different results" unless candidates[:dht].call == candidates[:active_support].call
+    raise ArgumentError, "Comparison has different results" unless candidates[:dht].call == candidates[:active_support].call
 
     comparisons << {dataset: name, results: candidates.transform_values { |callable| sample(callable) }}
   end

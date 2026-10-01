@@ -8,7 +8,8 @@
    package verification for every series. Record any versions not tested locally.
 3. Run `ruby script/benchmark.rb > results.json`; use the same Ruby, inputs and
    settings for comparisons. See [performance](performance.md).
-4. Finish README and Changelog, including the intended release date for review. Run `ruby script/verify_package.rb` against the final source.
+4. Finish README and Changelog, including the intended release date for review.
+   Run `ruby script/verify_package.rb` against the final source.
 5. Review the generated `pkg/deep_hash_transformer-VERSION.gem`, its SHA-256,
    contents, dependencies, compatibility results, and migration notes.
 6. Check the GitHub account's write permission and RubyGems credentials without
