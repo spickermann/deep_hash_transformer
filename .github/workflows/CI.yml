@@ -12,6 +12,8 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_FROZEN: "true"
 
     strategy:
       fail-fast: false
